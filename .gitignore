@@ -1,4 +1,5 @@
 # ignore config file with private info
 config.json
 .ipynb_checkpoints/
-
+*.csv
+.DS_store
