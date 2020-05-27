@@ -1,0 +1,228 @@
+,id,name,event_id
+0,kotdaoc,King of the Desert,kotd
+1,kotd2,King of the Desert 2,kotd2
+2,moa2v2,Masters of Arabia 2v2 - Double Elimination,moa2v2
+3,MoA5S1,Masters of Arena 5 Stage 1,moa5
+4,MoA5S2,Masters Of Arena 5 Stage 2,moa5
+5,vooblyofficial-egcrrnew,EGC #1: Strike the Balance - Final Round Robin,egc
+6,egc1-final,EGC #1 Final,egc
+7,loth2q,Legacy of the Huns 2 - Qualification Stage,loth
+8,loth2f,Legacy of the Huns 2 - Final Stage,loth
+9,boa_qual,Battle of Africa Qualifier,boa
+10,boa_swiss,Battle of Africa Swiss Stage,boa
+11,boa_ko,Battle of Africa KO Stage,boa
+12,NAC_AoE,Nili's Apartment Cup,nac1
+13,nac_elim,Nili's Apartment Cup Elimination,nac1
+14,nac2q1,NAC2 Qualifier1,nac2
+15,nac2q2,NAC2 Qualifier2,nac2
+16,NAC2_Group,NAC2 - Group Stage,nac2
+17,NAC2_Playoffs,NAC2 - Playoffs,nac2
+18,aoe2worldcup,AoE2 World Cup 2v2,wc
+19,escapeaoe-ECLQual,Escape Champions League - Qualification,ecl
+20,escapeaoe-ECLEUE1,Escape Champions League - EUE 1v1,ecl
+21,escapeaoe-ECLEUE2,Escape Champions League - EUE 4v4,ecl
+22,escapeaoe-ECLAfrica1,Escape Champions League - Africa 2v2,ecl
+23,escapeaoe-ECLAfrica2,Escape Champions League - Africa 3v3,ecl
+24,escapeaoe-ECLMidEast1,Escape Champions League - Middle East 1v1,ecl
+25,escapeaoe-ECLMidEast2,Escape Champions League - Middle East 3v3,ecl
+26,escapeaoe-ECLAsia1,Escape Champions League - Asia 2v2,ecl
+27,HiddenCup2Qual,Hidden Cup 2 Qualification,hc2
+28,HiddenCup2,Hidden Cup 2,hc2
+29,AESiL,Aspiring Experts Silver League,ae
+30,AEGL,Aspiring Experts,ae
+31,derac,DemEyesRed Arena Cup (DERAC),derac
+32,DoublesAge,Doubles Age,da
+33,DoublesAgeGL,Doubles Age Gold League,da
+34,DoublesAgeSL,Doubles Age Silver League,da
+35,MSC_,MSC,msc
+36,v6mfneui,Nomad Summer Showdown,nss
+37,DMWC2_Gold,DMWC2_Gold,dmwc2
+38,DMWC2_Silver,DMWC2_Silver,dmwc2
+39,TwoPools,Two Pools Tournament,tp
+40,aoe2monociv,EscapeAoE Mono-civ Cup,monociv
+41,NAC3_Qualifier,NAC3_Qualifier,nac3
+42,norway-brazil-2v2_showmatch-20160902,Viper/MbL vs Dogao/F1Re Showmatch (2016-06-02),2016-showmatches
+43,mmp_day1,Multiple Maps Promo - Day 1,mmp
+44,mmp_day2,Multiple Maps Promo - Day 2,mmp
+45,viper_vs_hera_20191221,TheViper vs Hera Showmatch,viper_vs_hera_20191221
+46,viper_vs_liereyy_20191228,TheViper vs Liereyy Showmatch,viper_vs_liereyy_20191228
+47,microsoft_international_playoff,Microsoft International Playoffs,microsoft_international
+48,1stChampionOfToday,1st Champion of Today,1stcot
+49,2ndchampionoftoday,2nd Champion of Today,2ndcot
+50,wcg_playoff,World Cyber Games Playoffs,wcg
+51,arbalet1_playoff,Arbalet Cup I Playoffs,arbalet1
+52,arbalet2_playoff,Arbalet Cup II Playoffs,arbalet2
+53,AoEHiddenCup,Hidden Cup,hc
+54,NAC3_Group_Stage,NAC3 Group Stage,nac3
+55,NAC3_Playoffs,NAC 3 - Main Event - Playoffs,nac3
+56,NAC3_Showmatch,NAC3 Empire Wars Showmatch,nac3
+57,3032141acdc35ab4d482ab4a-wolfpack_encounter,Wolfpack Encounter (2015),wolfpackencounter
+58,FCC_Bracket,Fair Civs Cup,fcc
+59,tim_goodboy-20130111,Tim vs Goodboy BO21 Showmatch (2013-01-11/21),2013-showmatches
+60,hiddencup3qual,Hidden Cup 3 Qual,hc3
+61,lc3_playoff,Legion Cup 3 Playoffs,lc3
+62,lc3_final,Legion Cup 3 Finals (Round Robin),lc3
+63,cott,Clash of the Titans,cott
+64,vcom-moa,Masters Of Arabia [Rounds 1-4],moa
+65,vcom-moa_,Masters Of Arabia [Final Stage],moa
+66,moaoc,Masters of AoC,moaoc
+67,arbalet3_finals,Arbalet Cup III Finals (Round Robin,arbalet3
+68,hc3_showmatches,Hidden Cup 3 Showmatches,hc3
+69,3032141acdc35ab4d482ab4a-bsk_mvp_1,BSK MVP 1 (2004) - Round 4+,bskmvp1
+70,hiddencup3,Hidden Cup 3,hc3
+71,visiblecup,Visible Cup,visiblecup
+72,visiblecup_showmatches,Visible Cup Showmatches,visiblecup
+73,am_secret_showmatch-20200401,aM vs Secret Showmatch (2020-04-01),2020-showmatches
+74,two_pools_showmatch-20200209,Two Pools Showmatch (2020-02-09),2020-showmatches
+75,tyrant_war_1-201403,TyRanT War 1,2014-showmatches
+76,am_secret_showmatch-20200201,aM vs Secret Showmatch (2020-02-01),2020-showmatches
+77,ER2020GROUPA,EURO RUMBLE 2020 GROUP A,eurorumble
+78,ER2020GROUPB,EURO RUMBLE 2020 GROUP B,eurorumble
+79,tyrant_war_2-201405,TyRanT War 2,2014-showmatches
+80,tyrant_lan-201404,TyRanT LAN,2014-showmatches
+81,viper_jordan_bo21,TheViper vs Jordan_32 BO21,2014-showmatches
+82,syc3,SY Cup III,syc3
+83,teteinv,TeTe Invitational 3v3,tete
+84,3032141acdc35ab4d482ab4a-wcg2002,WCG 2002,wcg2002
+85,rb_qualifier_1,Qualifier 1,rbw
+86,rb_qualifier_2,Qualifier 2,rbw
+87,maldivesaoc,Maldives AOC,wsvg
+88,yo_hera_showmatch-20200422,Yo vs Hera Showmatch (2020-04-22),2020-showmatches
+89,3032141acdc35ab4d482ab4a-bsk_mvp_2,BSK MVP 2 (2005),bskmvp2
+90,wemkp7mi,SBARRO Tournament Phase,sbarro
+91,3032141acdc35ab4d482ab4a-ggl_americup_aoc,GGL AmeriCup (2005),ggl
+92,2013TMW,The Medieval Wars,tmw
+93,3032141acdc35ab4d482ab4a-votcaoc,Veterans of the Clash,votc
+94,rb_finals,Finals,rbw
+95,3032141acdc35ab4d482ab4a-bcc3_wb,Brain Champion Cup Season 3 WB,bcc3
+96,3032141acdc35ab4d482ab4a-bcc3_lb,Brain Champion Cup Season 3 LB,bcc3
+97,3032141acdc35ab4d482ab4a-bcc3_league,Brain Champion Cup Season 3  League Stage,bcc3
+98,rtsl_season_20_playoffs,Playoffs,rtsl_season_20
+99,rtsl_season_20_division_6,Division 6,rtsl_season_20
+100,rtsl_season_20_division_2,Division 2,rtsl_season_20
+101,rtsl_season_20_division_7,Division 7,rtsl_season_20
+102,rtsl_season_20_division_3,Division 3,rtsl_season_20
+103,rtsl_season_20_division_5,Division 5,rtsl_season_20
+104,rtsl_season_20_division_4,Division 4,rtsl_season_20
+105,rtsl_season_20_division_1,Division 1,rtsl_season_20
+106,rtsl_season_41_playoffs,Playoffs,rtsl_season_41
+107,rtsl_season_41_division_6,Division 6,rtsl_season_41
+108,rtsl_season_41_division_2,Division 2,rtsl_season_41
+109,rtsl_season_41_division_3,Division 3,rtsl_season_41
+110,rtsl_season_41_division_5,Division 5,rtsl_season_41
+111,rtsl_season_41_division_4,Division 4,rtsl_season_41
+112,rtsl_season_41_division_1,Division 1,rtsl_season_41
+113,rtsl_season_40_playoffs,Playoffs,rtsl_season_40
+114,rtsl_season_40_division_2,Division 2,rtsl_season_40
+115,rtsl_season_40_division_3,Division 3,rtsl_season_40
+116,rtsl_season_40_division_4,Division 4,rtsl_season_40
+117,rtsl_season_40_division_1,Division 1,rtsl_season_40
+118,rtsl_season_39_playoffs,Playoffs,rtsl_season_39
+119,rtsl_season_39_division_2,Division 2,rtsl_season_39
+120,rtsl_season_39_division_3,Division 3,rtsl_season_39
+121,rtsl_season_39_division_4,Division 4,rtsl_season_39
+122,rtsl_season_39_division_1,Division 1,rtsl_season_39
+123,rtsl_season_38_playoffs,Playoffs,rtsl_season_38
+124,rtsl_season_38_division_2,Division 2,rtsl_season_38
+125,rtsl_season_38_division_3,Division 3,rtsl_season_38
+126,rtsl_season_38_division_5,Division 5,rtsl_season_38
+127,rtsl_season_38_division_4,Division 4,rtsl_season_38
+128,rtsl_season_38_division_1,Division 1,rtsl_season_38
+129,rtsl_season_37_playoffs,Playoffs,rtsl_season_37
+130,rtsl_season_37_division_2,Division 2,rtsl_season_37
+131,rtsl_season_37_division_3,Division 3,rtsl_season_37
+132,rtsl_season_37_division_4,Division 4,rtsl_season_37
+133,rtsl_season_37_division_1,Division 1,rtsl_season_37
+134,rtsl_season_36_playoffs,Playoffs,rtsl_season_36
+135,rtsl_season_36_division_2,Division 2,rtsl_season_36
+136,rtsl_season_36_division_3,Division 3,rtsl_season_36
+137,rtsl_season_36_division_4,Division 4,rtsl_season_36
+138,rtsl_season_36_division_1,Division 1,rtsl_season_36
+139,rtsl_season_35_playoffs,Playoffs,rtsl_season_35
+140,rtsl_season_35_division_2,Division 2,rtsl_season_35
+141,rtsl_season_35_division_3,Division 3,rtsl_season_35
+142,rtsl_season_35_division_5,Division 5,rtsl_season_35
+143,rtsl_season_35_division_4,Division 4,rtsl_season_35
+144,rtsl_season_35_division_1,Division 1,rtsl_season_35
+145,rtsl_season_34_playoffs,Playoffs,rtsl_season_34
+146,rtsl_season_34_division_2,Division 2,rtsl_season_34
+147,rtsl_season_34_division_3,Division 3,rtsl_season_34
+148,rtsl_season_34_division_4,Division 4,rtsl_season_34
+149,rtsl_season_34_division_1,Division 1,rtsl_season_34
+150,rtsl_season_33_playoffs,Playoffs,rtsl_season_33
+151,rtsl_season_33_division_2,Division 2,rtsl_season_33
+152,rtsl_season_33_division_3,Division 3,rtsl_season_33
+153,rtsl_season_33_division_4,Division 4,rtsl_season_33
+154,rtsl_season_33_division_1,Division 1,rtsl_season_33
+155,rtsl_season_32_division_3,Division 3,rtsl_season_32
+156,rtsl_season_32_playoffs,Playoffs,rtsl_season_32
+157,rtsl_season_32_division_1,Division 1,rtsl_season_32
+158,rtsl_season_32_division_2,Division 2,rtsl_season_32
+159,rtsl_season_31_playoffs,Playoffs,rtsl_season_31
+160,rtsl_season_31_division_2,Division 2,rtsl_season_31
+161,rtsl_season_31_division_3,Division 3,rtsl_season_31
+162,rtsl_season_31_division_4,Division 4,rtsl_season_31
+163,rtsl_season_31_division_1,Division 1,rtsl_season_31
+164,rtsl_season_30_playoffs,Playoffs,rtsl_season_30
+165,rtsl_season_30_division_2,Division 2,rtsl_season_30
+166,rtsl_season_30_division_3,Division 3,rtsl_season_30
+167,rtsl_season_30_division_4,Division 4,rtsl_season_30
+168,rtsl_season_30_division_1,Division 1,rtsl_season_30
+169,rtsl_season_29_playoffs,Playoffs,rtsl_season_29
+170,rtsl_season_29_division_2,Division 2,rtsl_season_29
+171,rtsl_season_29_division_3,Division 3,rtsl_season_29
+172,rtsl_season_29_division_5,Division 5,rtsl_season_29
+173,rtsl_season_29_division_4,Division 4,rtsl_season_29
+174,rtsl_season_29_division_1,Division 1,rtsl_season_29
+175,rtsl_season_28_division_3,Division 3,rtsl_season_28
+176,rtsl_season_28_playoffs,Playoffs,rtsl_season_28
+177,rtsl_season_28_division_1,Division 1,rtsl_season_28
+178,rtsl_season_28_division_2,Division 2,rtsl_season_28
+179,rtsl_season_27_division_3,Division 3,rtsl_season_27
+180,rtsl_season_27_playoffs,Playoffs,rtsl_season_27
+181,rtsl_season_27_division_1,Division 1,rtsl_season_27
+182,rtsl_season_27_division_2,Division 2,rtsl_season_27
+183,rtsl_season_26_playoffs,Playoffs,rtsl_season_26
+184,rtsl_season_26_division_2,Division 2,rtsl_season_26
+185,rtsl_season_26_division_3,Division 3,rtsl_season_26
+186,rtsl_season_26_division_4,Division 4,rtsl_season_26
+187,rtsl_season_26_division_1,Division 1,rtsl_season_26
+188,rtsl_season_25_playoffs,Playoffs,rtsl_season_25
+189,rtsl_season_25_division_2,Division 2,rtsl_season_25
+190,rtsl_season_25_division_3,Division 3,rtsl_season_25
+191,rtsl_season_25_division_4,Division 4,rtsl_season_25
+192,rtsl_season_25_division_1,Division 1,rtsl_season_25
+193,rtsl_season_24_playoffs,Playoffs,rtsl_season_24
+194,rtsl_season_24_division_2,Division 2,rtsl_season_24
+195,rtsl_season_24_division_3,Division 3,rtsl_season_24
+196,rtsl_season_24_division_5,Division 5,rtsl_season_24
+197,rtsl_season_24_division_4,Division 4,rtsl_season_24
+198,rtsl_season_24_division_1,Division 1,rtsl_season_24
+199,rtsl_season_23_playoffs,Playoffs,rtsl_season_23
+200,rtsl_season_23_division_2,Division 2,rtsl_season_23
+201,rtsl_season_23_division_3,Division 3,rtsl_season_23
+202,rtsl_season_23_division_5,Division 5,rtsl_season_23
+203,rtsl_season_23_division_4,Division 4,rtsl_season_23
+204,rtsl_season_23_division_1,Division 1,rtsl_season_23
+205,rtsl_season_22_playoffs,Playoffs,rtsl_season_22
+206,rtsl_season_22_division_6,Division 6,rtsl_season_22
+207,rtsl_season_22_division_2,Division 2,rtsl_season_22
+208,rtsl_season_22_division_3,Division 3,rtsl_season_22
+209,rtsl_season_22_division_5,Division 5,rtsl_season_22
+210,rtsl_season_22_division_4,Division 4,rtsl_season_22
+211,rtsl_season_22_division_1,Division 1,rtsl_season_22
+212,rtsl_season_21_playoffs,Playoffs,rtsl_season_21
+213,rtsl_season_21_division_6,Division 6,rtsl_season_21
+214,rtsl_season_21_division_2,Division 2,rtsl_season_21
+215,rtsl_season_21_division_3,Division 3,rtsl_season_21
+216,rtsl_season_21_division_5,Division 5,rtsl_season_21
+217,rtsl_season_21_division_4,Division 4,rtsl_season_21
+218,rtsl_season_21_division_1,Division 1,rtsl_season_21
+219,DMBQuali,Draft My Back Qualifiers,dmb
+220,BOA2QUALIFICATION,BOA2 QUALIFICATION ,boa2
+221,3032141acdc35ab4d482ab4a-bcc2_s1,Brain Champion Cup Season 2 (Stage 1),bcc2
+222,3032141acdc35ab4d482ab4a-bcc2_s2,Brain Champion Cup Season 2 (Stage 2),bcc2
+223,3032141acdc35ab4d482ab4a-sy_cup_2012,SY-CUP International Invitation Tournament (2012),sycup
+224,3032141acdc35ab4d482ab4a-handicap_aoc,Handicap Tournament,handicap
+225,AOEIIDEDMRedemptionCup,DM Redemption Cup,dmrc
+226,3032141acdc35ab4d482ab4a-boa2_aocrecs,Battle of Africa 2,boa2

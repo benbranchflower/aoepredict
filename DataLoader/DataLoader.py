@@ -28,6 +28,7 @@ class DataLoader():
         self.connection = self.make_conn(self.config)
         self.cursor = self.connection.cursor()
         
+        
         # add queries for reference tables
         self.maps_query = "SELECT * FROM maps;"
         self.civbonus_query = "SELECT * FROM civilization_bonuses;"
@@ -107,9 +108,12 @@ class DataLoader():
             self.objects = self.get_table(self.objects_query)
             self.tournaments = self.get_table(self.tournament_query)
         
+        # come column selections so you don't have to write them all everytime
+        self.match_columns = 'id,series_id,tournament_id,event_id,version,minor_version,dataset_id,dataset_version,platform_id,ladder_id,rated,winning_team_id,builtin_map_id,map_size_id,map_name,event_map_id,rms_custom,rms_seed,fixed_positions,played,platform_match_id,duration ,completed,postgame,type_id,difficulty_id,population_limit,map_reveal_choice_id,cheats,speed_id,mirror,diplomacy_type,team_size,starting_resources_id,starting_age_id,victory_condition_id,all_technologies,version_id,multiqueue,treaty_length,build,version_id,starting_palisades,starting_town_centers,starting_walls,state_reader_interval,state_reader_version,platform_metadata,water_percent,server'
+        
     
     def get_table(self, query, limit=None, **kwargs):
-        """ Uses a read_sql to make a query"""
+        """ Uses a read_sql to make a query as a wrapper for read_sql"""
         if limit is not None:
             query = query[:-1] + " LIMIT {0}".format(limit)
         try:
@@ -118,15 +122,16 @@ class DataLoader():
             self.make_conn(self.config)
             return pd.read_sql(query, con=self.connection, **kwargs)
         
-    def get_matches(self, query):
+    def get_matches(self, day, month, year, columns=None):
         """
         Collect the meta data for the matches that are to be analyzed
         and merge onto timestamped data for the relevant matches
         """
-        query = re.sub(';$', '', query)
-        query = re.sub("(?= WHERE)"," LEFT JOIN timeseries ON timeseries.match_id=matches.id")
-        query = re.sub()
-        self.get_table(query)
+        if columns is None:
+            columns = self.match_columns
+        query = "SELECT {0} FROM matches".format(columns)
+        query += " WHERE EXTRACT(DAY FROM played)={0} AND EXTRACT(MONTH FROM played)={1} AND EXTRACT(YEAR FROM played)={2}".format(day, month, year)
+        return self.get_table(query)
         
         
     def sql_execute(self, query, **kwargs):
