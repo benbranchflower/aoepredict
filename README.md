@@ -2,7 +2,7 @@
 
 This is a personal project that uses data read from memory of 
 Age of Empires 2 matches in order to make live predictions of
-match outcomes. I use data from a server hosted by <aocrecs.com> with data
+match outcomes. I use data from a server hosted by <https://aocrecs.com> with data
 on several thousand Age of Empires 2 games, primarily Wololo Kingdoms. 
 
 I will try to remeber to keep my environment file up to date but if there
