@@ -68,7 +68,7 @@ class DataLoader():
         self.chat_query = "SELECT * FROM chat;"
         self.research_query = "SELECT * FROM research;"
         self.market_query = "SELECT * FROM market;"
-        self.timeseries_query = "SELECT * FROM timeseries;"
+        self.timeseries_query = "SELECT * FROM timeseries"
         self.transaction_query = "SELECT * FROM transactions;"
         self.formation_query = "SELECT * FROM formations;"
         self.tribute_query = "SELECT * FROM tribute;"
@@ -177,13 +177,13 @@ class DataLoader():
             query += " LIMIT {0}".format(limit)
 
         out = self.get_table(query)
-        
+       
         if to_id:
             version_dict = {x:y for x,y in zip(self.version.name, self.version.id)}
             if 'version' in out.columns:
-                out.version.replace(version_dict, inplace=True)   
-                
-        self.match_indices = out.id
+                out.version = out.version.replace(version_dict)   
+        
+        self.match_indices = out.loc[:,'id']
         
         return out
     
@@ -204,14 +204,16 @@ class DataLoader():
         """
         
         match_ids = tuple(match_ids)
-        query =  self.timeseries_query + " WHERE match_id IN {0}".format(match_ids)
+        query = self.timeseries_query + " WHERE match_id IN {0}".format(match_ids)
         ts = self.get_table(query)
-        ts.set_index(['match_id','timestamp','player_number'])
-        ts.unstack(inplace=True)
-        ts.columns = ['_'.join([x,str(y)]) for x,y in out.columns.to_flat_index()]
-        ts['timestamp'] = pd.to_datetime([x[1] for x in ts.index])
+        ts.set_index(['match_id','timestamp','player_number'], inplace=True)
+        ts = ts.unstack()
+        print(ts)
+        ts.columns = ['_'.join([x,str(y)]) for x,y in ts.columns.to_flat_index()]
+        ts['timestamp'] = ts.index.get_level_values('timestamp')
+        
         if round_seconds:
-            ts['timestamp'] = ts['timestamp'].astype('datetime[s]') / np.timedelta64(1,'s')
+            ts['timestamp'] = ts['timestamp'].astype('datetime64[s]') / np.timedelta64(1,'s')
         return ts
         
     def sql_execute(self, query, **kwargs):
@@ -223,4 +225,9 @@ class DataLoader():
         """ establishes a connection with the aocrecs SQL server """
         return psycopg2.connect(f"dbname={config['dbname']} user={config['user']} password={config['password']} host={config['host']}")
             
+if __name__ == '__main__':
+    dl = DataLoader('../config.json')
+    dl.get_matches()
+    dl.get_timeseries(dl.match_indices)
     
+        
