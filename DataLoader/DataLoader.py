@@ -53,6 +53,7 @@ class DataLoader():
         self.formationtype_query = "SELECT * FROM formation_types;"
         self.objects_query = "SELECT * FROM objects;"
         self.tournament_query = "SELECT * FROM tournaments;"
+        self.ladder_query = "SELECT * FROM ladders;"
         
         # add queries for meta data
         self.participants_query = "SELECT * FROM participants;"
@@ -82,7 +83,6 @@ class DataLoader():
         self.event_query = "SELECT * FROM events;"
         self.objinst_query = "SELECT * FROM object_instances;"
         self.rounds_query = "SELECT * FROM rounds;"
-        self.ladder_query = "SELECT * FROM ladders;"
         
         if save_ref_tables:
             self.maps = self.get_table(self.maps_query)
@@ -107,10 +107,14 @@ class DataLoader():
             self.formation = self.get_table(self.formationtype_query)
             self.objects = self.get_table(self.objects_query)
             self.tournaments = self.get_table(self.tournament_query)
+            self.ladders = self.get_table(self.ladder_query)
+            self.platforms = self.get_table(self.platforms_query)
         
         # come column selections so you don't have to write them all everytime
         self.match_columns = 'id,series_id,tournament_id,event_id,version,minor_version,dataset_id,dataset_version,platform_id,ladder_id,rated,winning_team_id,builtin_map_id,map_size_id,map_name,event_map_id,rms_custom,rms_seed,fixed_positions,played,platform_match_id,duration ,completed,postgame,type_id,difficulty_id,population_limit,map_reveal_choice_id,cheats,speed_id,mirror,diplomacy_type,team_size,starting_resources_id,starting_age_id,victory_condition_id,all_technologies,version_id,multiqueue,treaty_length,build,version_id,starting_palisades,starting_town_centers,starting_walls,state_reader_interval,state_reader_version,platform_metadata,water_percent,server'
         
+        # some custom id tables
+        self.version
     
     def get_table(self, query, limit=None, **kwargs):
         """ Uses a read_sql to make a query as a wrapper for read_sql"""
@@ -122,16 +126,62 @@ class DataLoader():
             self.make_conn(self.config)
             return pd.read_sql(query, con=self.connection, **kwargs)
         
-    def get_matches(self, day, month, year, columns=None):
+    def get_matches(self, day=19, month=11, year=2019, diplo='1v1', platform='voobly',
+                    version='userpatch 1.5', maps=(9), limit=None,
+                    dataset=1, ladder=131, map_size=120, rated='TRUE', 
+                    completed='TRUE', columns=None, to_id=True):
         """
         Collect the meta data for the matches that are to be analyzed
         and merge onto timestamped data for the relevant matches
+        
+        day (int): day of month to be grabbed
+        month (int): month of year to be grabbed
+        year (int): year to be grabbed
+        diplo (str): Type of game 1v1, TG or FFA
+        platform (str): Which platfoorm to grab; voobly, vooblycn, de, ...
+        version (str): What patch the games are to be played on
+        limit (int): The maximum number of rows collected with the query
+        maps (tuple): The mapids tp be collected, default is voobly Arabia
+        dataset (int): The dataset id
+        ladder (int): The ladder the games were played on
+        map_size (int): THe size of the map
+        rated (str): Whether or not the game was rated 'TRUE' or 'FALSE'
+        completed (str): whether or not the game was completed, 'TRUE' or 'FALSE'
+        to_id (bool): whether or not to convert verson and platform to integers
         """
         if columns is None:
             columns = self.match_columns
         query = "SELECT {0} FROM matches".format(columns)
         query += " WHERE EXTRACT(DAY FROM played)={0} AND EXTRACT(MONTH FROM played)={1} AND EXTRACT(YEAR FROM played)={2}".format(day, month, year)
-        return self.get_table(query)
+        if diplo is not None:
+            query += " AND diplomacy_type='{0}'".format(diplo)
+        if platform is not None:
+            query += " AND platform_id='{0}'".format(platform)
+        if version is not None:
+            query += " AND version='{0}'".format(version)
+        if maps is not None:
+            query += " AND builtin_map_id IN ({0})".format(maps)
+        if dataset is not None:
+            query += " AND dataset_id={0}".format(dataset)
+        if ladder is not None:
+            query += " AND ladder_id={0}".format(ladder)
+        if map_size is not None:
+            query += " AND map_size_id={0}".format(map_size)
+        if rated is not None:
+            query += " AND rated={0}".format(rated)
+        if completed is not None:
+            query += " AND completed={0}".format(completed)
+        if limit is not None:
+            query += " LIMIT {0}".format(limit)
+
+        out = self.get_table(query)
+        
+        if to_id:
+            version_dict = {x:y for x,y in zip(self.version.name, self.version.id)}
+            if 'version' in out.columns:
+                out.version.replace(version_dict, inplace=True)            
+        
+        return out
         
         
     def sql_execute(self, query, **kwargs):
