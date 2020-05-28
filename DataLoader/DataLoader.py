@@ -9,8 +9,9 @@ Ben Branchflower, benbranchflower@gmail.com
 import json
 import re
 
-import psycopg2
+import numpy as np
 import pandas as pd
+import psycopg2
 
 
 class DataLoader():
@@ -27,7 +28,6 @@ class DataLoader():
 
         self.connection = self.make_conn(self.config)
         self.cursor = self.connection.cursor()
-        
         
         # add queries for reference tables
         self.maps_query = "SELECT * FROM maps;"
@@ -111,10 +111,11 @@ class DataLoader():
             self.platforms = self.get_table(self.platforms_query)
         
         # come column selections so you don't have to write them all everytime
-        self.match_columns = 'id,series_id,tournament_id,event_id,version,minor_version,dataset_id,dataset_version,platform_id,ladder_id,rated,winning_team_id,builtin_map_id,map_size_id,map_name,event_map_id,rms_custom,rms_seed,fixed_positions,played,platform_match_id,duration ,completed,postgame,type_id,difficulty_id,population_limit,map_reveal_choice_id,cheats,speed_id,mirror,diplomacy_type,team_size,starting_resources_id,starting_age_id,victory_condition_id,all_technologies,version_id,multiqueue,treaty_length,build,version_id,starting_palisades,starting_town_centers,starting_walls,state_reader_interval,state_reader_version,platform_metadata,water_percent,server'
+        self.match_columns = 'id,series_id,tournament_id,event_id,version,minor_version,dataset_id,dataset_version,platform_id,ladder_id,rated,winning_team_id,builtin_map_id,map_size_id,event_map_id,rms_custom,rms_seed,fixed_positions,played,platform_match_id,duration ,completed,postgame,type_id,difficulty_id,population_limit,map_reveal_choice_id,cheats,speed_id,mirror,diplomacy_type,team_size,starting_resources_id,starting_age_id,victory_condition_id,all_technologies,version_id,multiqueue,treaty_length,build,version_id,starting_palisades,starting_town_centers,starting_walls,state_reader_interval,state_reader_version,platform_metadata,water_percent,server'
         
         # some custom id tables
         self.version
+        
     
     def get_table(self, query, limit=None, **kwargs):
         """ Uses a read_sql to make a query as a wrapper for read_sql"""
@@ -125,6 +126,7 @@ class DataLoader():
         except (psycopg2.OperationalError, psycopg2.InterfaceError):
             self.make_conn(self.config)
             return pd.read_sql(query, con=self.connection, **kwargs)
+        
         
     def get_matches(self, day=19, month=11, year=2019, diplo='1v1', platform='voobly',
                     version='userpatch 1.5', maps=(9), limit=None,
@@ -179,10 +181,38 @@ class DataLoader():
         if to_id:
             version_dict = {x:y for x,y in zip(self.version.name, self.version.id)}
             if 'version' in out.columns:
-                out.version.replace(version_dict, inplace=True)            
+                out.version.replace(version_dict, inplace=True)   
+                
+        self.match_indices = out.id
         
         return out
+    
+    def get_timeseries(self, match_ids, round_seconds=True):
+        """
+        Get the basic timeseries info for the matches
+
+        Parameters
+        ----------
+        match_ids : TYPE
+            DESCRIPTION.
+
+        Returns
+        -------
+        ts : TYPE
+            DESCRIPTION.
+
+        """
         
+        match_ids = tuple(match_ids)
+        query =  self.timeseries_query + " WHERE match_id IN {0}".format(match_ids)
+        ts = self.get_table(query)
+        ts.set_index(['match_id','timestamp','player_number'])
+        ts.unstack(inplace=True)
+        ts.columns = ['_'.join([x,str(y)]) for x,y in out.columns.to_flat_index()]
+        ts['timestamp'] = pd.to_datetime([x[1] for x in ts.index])
+        if round_seconds:
+            ts['timestamp'] = ts['timestamp'].astype('datetime[s]') / np.timedelta64(1,'s')
+        return ts
         
     def sql_execute(self, query, **kwargs):
         """ do general custom queries in the database """
