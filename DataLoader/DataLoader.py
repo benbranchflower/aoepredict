@@ -117,15 +117,17 @@ class DataLoader():
         self.version
         
     
-    def get_table(self, query, limit=None, **kwargs):
+    def get_table(self, query, limit=None, index='id', **kwargs):
         """ Uses a read_sql to make a query as a wrapper for read_sql"""
         if limit is not None:
             query = query[:-1] + " LIMIT {0}".format(limit)
         try:
-            return pd.read_sql(query, con=self.connection, **kwargs)
+            return pd.read_sql(query, con=self.connection, index_col=index,
+                               **kwargs)
         except (psycopg2.OperationalError, psycopg2.InterfaceError):
             self.make_conn(self.config)
-            return pd.read_sql(query, con=self.connection, **kwargs)
+            return pd.read_sql(query, con=self.connection, index_col=index,
+                               **kwargs)
         
         
     def get_matches(self, day=19, month=11, year=2019, diplo='1v1', platform='voobly',
