@@ -40,7 +40,7 @@ class DataLoader():
         self.datasets_query = "SELECT * FROM datasets;"
         self.gametype_query = "SELECT * FROM game_types;"
         self.tech_query = "SELECT * FROM technologies;"
-        self.diff_query = "SELECT * FROM difficulties;"
+        self.difficulties_query = "SELECT * FROM difficulties;"
         self.mapreveal_query = "SELECT * FROM map_reveal_choices;"
         self.speed_query = "SELECT * FROM speeds;"
         self.startres_query = "SELECT * FROM starting_resources;"
@@ -68,7 +68,7 @@ class DataLoader():
         self.chat_query = "SELECT * FROM chat;"
         self.research_query = "SELECT * FROM research;"
         self.market_query = "SELECT * FROM market;"
-        self.timeseries_query = "SELECT * FROM timeseries"
+        self.timeseries_query = "SELECT * FROM timeseries;"
         self.transaction_query = "SELECT * FROM transactions;"
         self.formation_query = "SELECT * FROM formations;"
         self.tribute_query = "SELECT * FROM tribute;"
@@ -85,30 +85,30 @@ class DataLoader():
         self.rounds_query = "SELECT * FROM rounds;"
         
         if save_ref_tables:
-            self.maps = self.get_table(self.maps_query)
-            self.civbonus = self.get_table(self.civbonus_query)
-            self.color = self.get_table(self.color_query)
-            self.civ = self.get_table(self.civ_query)
-            self.mapsize = self.get_table(self.mapsize_query)
-            self.eventmap = self.get_table(self.eventmap_query)
-            self.datasets = self.get_table(self.datasets_query)
-            self.gametype = self.get_table(self.gametype_query)
-            self.tech = self.get_table(self.tech_query)
-            self.diff = self.get_table(self.diff_query)
-            self.mapreveal = self.get_table(self.mapreveal_query)
-            self.speed = self.get_table(self.speed_query)
-            self.startres = self.get_table(self.startres_query)
-            self.startage = self.get_table(self.startage_query)
-            self.victcond = self.get_table(self.victcond_query)
-            self.terrain = self.get_table(self.terrain_query)
-            self.version = self.get_table(self.version_query)
-            self.action = self.get_table(self.action_query)
-            self.resource = self.get_table(self.resource_query)
-            self.formation = self.get_table(self.formationtype_query)
-            self.objects = self.get_table(self.objects_query)
-            self.tournaments = self.get_table(self.tournament_query)
-            self.ladders = self.get_table(self.ladder_query)
-            self.platforms = self.get_table(self.platforms_query)
+            self.maps = self.get_table(self.maps_query, index='id')
+            self.civbonus = self.get_table(self.civbonus_query, index='id')
+            self.color = self.get_table(self.color_query, index='id')
+            self.civ = self.get_table(self.civ_query, index='id')
+            self.mapsize = self.get_table(self.mapsize_query, index='id')
+            self.eventmap = self.get_table(self.eventmap_query, index='id')
+            self.datasets = self.get_table(self.datasets_query, index='id')
+            self.gametype = self.get_table(self.gametype_query, index='id')
+            self.tech = self.get_table(self.tech_query, index='id')
+            self.difficulties = self.get_table(self.difficulties_query, index='id')
+            self.mapreveal = self.get_table(self.mapreveal_query, index='id')
+            self.speed = self.get_table(self.speed_query, index='id')
+            self.startres = self.get_table(self.startres_query, index='id')
+            self.startage = self.get_table(self.startage_query, index='id')
+            self.victcond = self.get_table(self.victcond_query, index='id')
+            self.terrain = self.get_table(self.terrain_query, index='id')
+            self.version = self.get_table(self.version_query, index='id')
+            self.action = self.get_table(self.action_query, index='id')
+            self.resource = self.get_table(self.resource_query, index='id')
+            self.formation = self.get_table(self.formationtype_query, index='id')
+            self.objects = self.get_table(self.objects_query, index='id')
+            self.tournaments = self.get_table(self.tournament_query, index='id')
+            self.ladders = self.get_table(self.ladder_query, index='id')
+            self.platforms = self.get_table(self.platforms_query, index='id')
         
         # come column selections so you don't have to write them all everytime
         self.match_columns = 'id,series_id,tournament_id,event_id,version,minor_version,dataset_id,dataset_version,platform_id,ladder_id,rated,winning_team_id,builtin_map_id,map_size_id,event_map_id,rms_custom,rms_seed,fixed_positions,played,platform_match_id,duration ,completed,postgame,type_id,difficulty_id,population_limit,map_reveal_choice_id,cheats,speed_id,mirror,diplomacy_type,team_size,starting_resources_id,starting_age_id,victory_condition_id,all_technologies,version_id,multiqueue,treaty_length,build,version_id,starting_palisades,starting_town_centers,starting_walls,state_reader_interval,state_reader_version,platform_metadata,water_percent,server'
@@ -117,7 +117,7 @@ class DataLoader():
         self.version
         
     
-    def get_table(self, query, limit=None, index='id', **kwargs):
+    def get_table(self, query, limit=None, index=None, **kwargs):
         """ Uses a read_sql to make a query as a wrapper for read_sql"""
         if limit is not None:
             query = query[:-1] + " LIMIT {0}".format(limit)
