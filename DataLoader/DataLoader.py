@@ -82,8 +82,7 @@ class DataLoader():
         self.hc_query = "SELECT * FROM hc;"
         self.event_query = "SELECT * FROM events;"
         self.objinst_query = "SELECT * FROM object_instances;"
-        self.rounds_query = "SELECT * FROM rounds;"
-        
+        self.rounds_query = "SELECT * FROM rounds;"        
         if save_ref_tables:
             self.maps = self.get_table(self.maps_query, index='id')
             self.civbonus = self.get_table(self.civbonus_query, index='id')
@@ -156,7 +155,9 @@ class DataLoader():
         if columns is None:
             columns = self.match_columns
         query = "SELECT {0} FROM matches".format(columns)
-        query += " WHERE EXTRACT(DAY FROM played)={0} AND EXTRACT(MONTH FROM played)={1} AND EXTRACT(YEAR FROM played)={2}".format(day, month, year)
+        # FIXME: Add option to select dates
+        # query += " WHERE EXTRACT(DAY FROM played)={0} AND EXTRACT(MONTH FROM played)={1} AND EXTRACT(YEAR FROM played)={2}".format(day, month, year)
+        query += " WHERE TRUE"
         if diplo is not None:
             query += " AND diplomacy_type='{0}'".format(diplo)
         if platform is not None:
@@ -189,7 +190,8 @@ class DataLoader():
         
         return out
     
-    def get_timeseries(self, match_ids, round_seconds=True):
+    
+    def get_timeseries(self, match_ids=None, round_seconds=True):
         """
         Get the basic timeseries info for the matches
 
@@ -204,19 +206,30 @@ class DataLoader():
             DESCRIPTION.
 
         """
-        
+        if match_ids is None:
+            match_ids = self.match_indices
         match_ids = tuple(match_ids)
-        query = self.timeseries_query + " WHERE match_id IN {0}".format(match_ids)
+        query = self.timeseries_query[:-1] + " WHERE match_id IN {0}".format(match_ids)
         ts = self.get_table(query)
         ts.set_index(['match_id','timestamp','player_number'], inplace=True)
         ts = ts.unstack()
-        print(ts)
+        # print(ts)
         ts.columns = ['_'.join([x,str(y)]) for x,y in ts.columns.to_flat_index()]
         ts['timestamp'] = ts.index.get_level_values('timestamp')
         
-        if round_seconds:
-            ts['timestamp'] = ts['timestamp'].astype('datetime64[s]') / np.timedelta64(1,'s')
+        #if round_seconds:
+        #    ts['timestamp'] = ts['timestamp'].astype('datetime64[s]') / np.timedelta64(1,'s')
         return ts
+    
+    
+    def get_player_table(self):
+        players = pd.read_sql("SELECT * FROM players WHERE match_id in {0}".format(tuple(self.match_indices)),
+                      con=self.connection, index_col=None)
+        players.set_index(['match_id','number'], inplace=True)
+        players = players.unstack()
+        players.columns = [c + "_{}".format(p) for c, p in players.columns.values]
+        return players
+    
         
     def sql_execute(self, query, **kwargs):
         """ do general custom queries in the database """
@@ -230,6 +243,6 @@ class DataLoader():
 if __name__ == '__main__':
     dl = DataLoader('../config.json')
     dl.get_matches()
-    dl.get_timeseries(dl.match_indices)
+    dl.get_timeseries()
     
         
