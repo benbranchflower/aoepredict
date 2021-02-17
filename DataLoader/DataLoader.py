@@ -1,7 +1,8 @@
 """
-This file defines a class with functionality to handle
-working with the data so that the modeling files can be
-neater
+This file defines a class with functionality to handle working with the data
+so that the modeling files can be neater. I tried to make it easier to use
+than navigating the SQL database itself but you can use sql_execute and
+get_table to do any kind of query you would like. 
 
 Ben Branchflower, benbranchflower@gmail.com
 """
@@ -57,6 +58,7 @@ class DataLoader():
         
         # add queries for meta data
         self.participants_query = "SELECT * FROM participants;"
+        self.player_query = "SELECT * FROM players;"
         self.series_query = "SELECT * FROM series;"
         self.seriesmeta_query = "SELECT * FROM series_metadata;"
         self.team_query = "SELECT * FROM teams;"
@@ -77,7 +79,6 @@ class DataLoader():
         self.tablename_query = "SELECT table_name FROM information_schema.tables WHERE table_type='BASE TABLE' AND table_schema='public';"
         self.users_query = "SELECT * FROM users;"
         self.files_query = "SELECT * FROM files;"
-        self.player_query = "SELECT * FROM players;"
         self.people_query = "SELECT * FROM people;"
         self.hc_query = "SELECT * FROM hc;"
         self.event_query = "SELECT * FROM events;"
@@ -182,7 +183,7 @@ class DataLoader():
         out = self.get_table(query)
        
         if to_id:
-            version_dict = {x:y for x,y in zip(self.version.name, self.version.id)}
+            version_dict = {x:y for x,y in zip(self.version.name, self.version.index)}
             if 'version' in out.columns:
                 out.version = out.version.replace(version_dict)   
         
@@ -222,6 +223,34 @@ class DataLoader():
         return ts
     
     
+    def get_players(self, match_ids=None):
+        """
+        do a simple table of the players table to get info on match participants
+        at the time of the match
+        """
+        if match_ids is None:
+            match_ids = self.match_indices
+        match_ids = tuple(match_ids)
+        query = self.player_query[:-1] + " WHERE match_id IN {0}".format(match_ids)
+        players = self.get_table(query)
+        
+        return players
+    
+    def get_teams(self, match_ids=None):
+        """
+        do a simple table of the players table to get info on match winners
+        """
+        if match_ids is None:
+            match_ids = self.match_indices
+        match_ids = tuple(match_ids)
+        query = self.team_query[:-1] + " WHERE match_id IN {0}".format(match_ids)
+        teams = self.get_table(query)
+        
+        return teams
+    
+    
+    ''' # this should be a more general function when I get into doing team games
+        # for now I will do the simple 1v1 draw
     def get_player_table(self):
         players = pd.read_sql("SELECT * FROM players WHERE match_id in {0}".format(tuple(self.match_indices)),
                       con=self.connection, index_col=None)
@@ -229,7 +258,7 @@ class DataLoader():
         players = players.unstack()
         players.columns = [c + "_{}".format(p) for c, p in players.columns.values]
         return players
-    
+    '''
         
     def sql_execute(self, query, **kwargs):
         """ do general custom queries in the database """
@@ -242,7 +271,18 @@ class DataLoader():
             
 if __name__ == '__main__':
     dl = DataLoader('../config.json')
-    dl.get_matches()
-    dl.get_timeseries()
+    matches = dl.get_matches() # get match meta info
+    timeseries = dl.get_timeseries().drop('timestamp', axis=1) # get timestamped game state data
+    players = dl.get_players()
+    teams = dl.get_teams()
+    
+    # merge match meta data to timeseries data for panel
+    panel = timeseries.reset_index().merge(matches, 'left', left_on='match_id', right_on='id')
+    # get game time in seconds for consistent timeseries variable
+    panel['timestamp'] = panel.timestamp.dt.seconds + panel.timestamp.dt.microseconds/1000000
+    
+    
+    
+    
     
         
